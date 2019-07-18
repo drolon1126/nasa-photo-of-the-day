@@ -1,32 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import useDatePicker from './customHooks';
-import axios from 'axios';
-import Photo from './photo.js'
 
-
-const DatePicker = () => {
-  const [photo, setPhoto] = useState({});
-  useEffect(()=>{
-    axios.get(`https://api.nasa.gov/planetary/apod?api_key=CrEwauJpo5nV9coQtGl5M8giH6SfGzz9ZIp7eeC6&date=2019-07-17`)
-    .then(whatchuGet=>{
-      console.log(whatchuGet);
-      setPhoto(whatchuGet.data);
-    })
-    .catch( err => {
-      console.log("Error:", err);
-    })    
-  },[]);
-  const changeDate = () => {
-    axios.get(`https://api.nasa.gov/planetary/apod?api_key=CrEwauJpo5nV9coQtGl5M8giH6SfGzz9ZIp7eeC6&date=${input.date}`)
-    .then(whatchuGet=>{
-      console.log(whatchuGet);
-      setPhoto(whatchuGet.data);
-    })
-    .catch( err => {
-      console.log("Error:", err);
-    })
+const DatePicker = (props) => {
+  
+  const [input,setInput] = useState(props.curDate);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.changeDate(input);
   }
-  const {input, handleInputChange, handleSubmit} = useDatePicker({date:'2019-07-17'},changeDate);
+
+  const handleInputChange = (event) => {
+    event.persist();
+    setInput(event.target.value);
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -34,9 +20,6 @@ const DatePicker = () => {
         <input type='date' name='date' onChange={handleInputChange}/>
         <button type='submit'>Go</button>
       </form>
-      <div>
-        <Photo data={photo}/>
-      </div>
     </div>
   ) 
 };
