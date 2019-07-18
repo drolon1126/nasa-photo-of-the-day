@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import DatePicker from './components/datePicker.js'
 import axios from 'axios';
 import Photo from './components/photo.js'
+import { Container } from 'semantic-ui-react'
 import "./App.css";
 
 function App() {
@@ -20,10 +21,10 @@ function App() {
   },[dateSelected]);
 
   return (
-    <div className="App">
+    <Container className="App">
       <DatePicker curDate={dateSelected} changeDate={setDateSelected}/>
       <Photo data={photo}/>
-    </div>
+    </Container>
   );
 }
 

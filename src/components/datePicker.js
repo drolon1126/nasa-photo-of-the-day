@@ -1,17 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import {useDatePicker} from './customHooks';
+
+
 
 const DatePicker = (props) => {
   
-  const [input,setInput] = useState(props.curDate);
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.changeDate(input);
-  }
-
-  const handleInputChange = (event) => {
-    event.persist();
-    setInput(event.target.value);
-  }
+  const {input, handleInputChange, handleSubmit} = useDatePicker('2019-07-17',props.changeDate);
 
   return (
     <div>

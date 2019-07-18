@@ -1,4 +1,6 @@
 import React from 'react';
+import { Grid,Item,Image } from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 
 const Photo = (props) => {
 
@@ -26,21 +28,18 @@ const Photo = (props) => {
     );
   } else {
     return (
-      <div>
-        <div>
-          <h1>{props.data.title}</h1>
-        </div>
-
-        <div>
-          <img
-            src={props.data.url}
-          />
-        </div>
-
-        <div>
-          <p>{props.data.explanation}</p>
-        </div>
-      </div>
+      <Item>
+        <Item.Image src={props.data.url} />
+        <Item.Content>
+          <Item.Header>{props.data.title}</Item.Header>
+          <Item.Meta>
+            <span className='date'>{props.data.date}</span>
+          </Item.Meta>
+          <Item.Description>
+            {props.data.explanation}
+          </Item.Description>
+        </Item.Content>
+      </Item>
     );
   }
 
