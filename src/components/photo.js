@@ -1,45 +1,68 @@
 import React from 'react';
-import { Grid,Item,Image } from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
+//import { Grid,Card, Image, Embed } from "semantic-ui-react";
+//import 'semantic-ui-css/semantic.min.css';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+  card: {
+    maxWidth: 500,
+    margin: '50px auto',
+  },
+});
 
 const Photo = (props) => {
 
+  const classes = useStyles();
+
   if(props.data.media_type==='video'){
     return (
-      <div>
-        <div>
-          <h1>{props.data.title}</h1>
-        </div>
-
-        <div>
-          <iframe 
-            src={props.data.url}
-            frameBorder='0'
-            allow='autoplay; encrypted-media'
-            allowFullScreen
-            title='video'
+      <Card className={classes.card}>
+        <CardActionArea>
+          <CardMedia
+            component="iframe"
+            alt="Nasa Image of the Day"
+            height= '400'
+            image={props.data.url}
+            title={props.data.title}
           />
-        </div>
-
-        <div>
-          <p>{props.data.explanation}</p>
-        </div>
-      </div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.data.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.data.explanation}
+            </Typography>
+          </CardContent>
+        </CardActionArea>        
+      </Card>
     );
   } else {
     return (
-      <Item>
-        <Item.Image src={props.data.url} />
-        <Item.Content>
-          <Item.Header>{props.data.title}</Item.Header>
-          <Item.Meta>
-            <span className='date'>{props.data.date}</span>
-          </Item.Meta>
-          <Item.Description>
-            {props.data.explanation}
-          </Item.Description>
-        </Item.Content>
-      </Item>
+      <Card className={classes.card}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="Nasa Image of the Day"
+            height= '400'
+            image={props.data.url}
+            title={props.data.title}
+          />
+          <CardContent height={700}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.data.title}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.data.explanation}
+            </Typography>
+          </CardContent>
+        </CardActionArea>        
+      </Card>
     );
   }
 
