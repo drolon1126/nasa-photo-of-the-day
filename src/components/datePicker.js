@@ -10,7 +10,7 @@ const DatePicker = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Select A Date: </h1>
+        <h1 style={{color:'white'}}>Select A Date: </h1>
         <input type='date' name='date' onChange={handleInputChange}/>
         <button type='submit'>Go</button>
       </form>
